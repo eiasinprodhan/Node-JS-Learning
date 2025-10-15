@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const mysqlConnection = require('./configurations/database');
 
 // Load environment variables
@@ -12,6 +13,7 @@ const app = express();
 // Middleware
 app.use(morgan('dev'));
 app.use(express.json());
+// app.use(cors);
 
 // Routes
 app.use('/api/v1/', require('./routes/employeeRoute'));
