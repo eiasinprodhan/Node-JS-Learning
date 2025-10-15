@@ -9,32 +9,33 @@ dotenv.config();
 // Create Express app
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(morgan('dev'));
 app.use(express.json());
 
 // Routes
-app.use('/api/v1/employee', require('./routes/employeeRoute'));
+app.use('/api/v1/', require('./routes/employeeRoute'));
 
-// 404 Middleware
-app.use((req, res, next) => {
+// 404 Handler
+app.use((req, res) => {
     res.status(404).json({
-        message: '404 Not found.'
+        success: false,
+        message: '404 Not Found.',
     });
 });
 
-// DB Connection check
-mysqlConnection.query('SELECT 1', (error) => {
-    if(error){
-        console.log('Error connecting to the database:', error);
-        return;
-    }
-    console.log('Connected to the MySQL database.');
-});
+// Check DB Connection before starting the server
+mysqlConnection.query('SELECT 1')
+    .then(() => {
+        console.log('Connected to the MySQL database.');
 
-// Start the server
-const PORT = process.env.PORT;
-
-app.listen(PORT, (req, res) => {
-    console.log("Hello, World");
-})
+        // Start the server after confirming DB is connected
+        const PORT = process.env.PORT || 8080;
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
+        });
+    })
+    .catch((error) => {
+        console.error('Error connecting to the database:', error.message);
+        process.exit(1);
+    });
