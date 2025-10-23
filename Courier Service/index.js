@@ -18,8 +18,7 @@ app.get('/', (req, res)=>{
 
 
 // User route
-const userRoutes = require('./routes/user');
-app.use('/api/users', userRoutes);
+app.use('/api/users', require("./routes/userRoutes"));
 
 // Country route
 app.use("/api/countries", require("./routes/countryRoutes"));
