@@ -1,5 +1,5 @@
 {
-  "name": "courier-service-back-end",
+  "name": "courier-service-front-end",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
