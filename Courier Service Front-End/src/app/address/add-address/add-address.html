@@ -1,0 +1,113 @@
+<!-- add-address.html -->
+<div class="container mt-4">
+  <h3 class="mb-4">Add Address</h3>
+
+  <form (ngSubmit)="saveAddress()">
+
+    <!-- Address Lines -->
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <label for="addressLine1" class="form-label">Address Line 1</label>
+        <input
+          type="text"
+          id="addressLine1"
+          class="form-control"
+          [(ngModel)]="addressLine1"
+          name="addressLine1"
+          placeholder="Enter Address Line 1"
+          required
+        >
+      </div>
+
+      <div class="col-md-6">
+        <label for="addressLine2" class="form-label">Address Line 2</label>
+        <input
+          type="text"
+          id="addressLine2"
+          class="form-control"
+          [(ngModel)]="addressLine2"
+          name="addressLine2"
+          placeholder="Enter Address Line 2"
+        >
+      </div>
+    </div>
+
+    <!-- Country → Division → District → Police Station -->
+    <div class="row mb-3">
+      <!-- Country -->
+      <div class="col-md-3">
+        <label for="countrySelect" class="form-label">Country</label>
+        <select
+          id="countrySelect"
+          class="form-select"
+          [(ngModel)]="selectedCountry"
+          name="country"
+          (change)="onCountryChange()"
+          required
+        >
+          <option value="0">-- Select Country --</option>
+          <option *ngFor="let c of countries" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+
+      <!-- Division -->
+      <div class="col-md-3">
+        <label for="divisionSelect" class="form-label">Division</label>
+        <select
+          id="divisionSelect"
+          class="form-select"
+          [(ngModel)]="selectedDivision"
+          name="division"
+          (change)="onDivisionChange()"
+          [disabled]="!divisions.length"
+          required
+        >
+          <option value="0">-- Select Division --</option>
+          <option *ngFor="let d of divisions" [value]="d.id">{{ d.name }}</option>
+        </select>
+      </div>
+
+      <!-- District -->
+      <div class="col-md-3">
+        <label for="districtSelect" class="form-label">District</label>
+        <select
+          id="districtSelect"
+          class="form-select"
+          [(ngModel)]="selectedDistrict"
+          name="district"
+          (change)="onDistrictChange()"
+          [disabled]="!districts.length"
+          required
+        >
+          <option value="0">-- Select District --</option>
+          <option *ngFor="let dis of districts" [value]="dis.id">{{ dis.name }}</option>
+        </select>
+      </div>
+
+      <!-- Police Station -->
+      <div class="col-md-3">
+        <label for="policeStationSelect" class="form-label">Police Station</label>
+        <select
+          id="policeStationSelect"
+          class="form-select"
+          [(ngModel)]="selectedPoliceStation"
+          name="policeStation"
+          [disabled]="!policeStations.length"
+          required
+        >
+          <option value="0">-- Select Police Station --</option>
+          <option *ngFor="let ps of policeStations" [value]="ps.id">{{ ps.name }}</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="row mt-4">
+      <div class="col-md-12 text-end">
+        <button type="submit" class="btn btn-primary">Save Address</button>
+        <button type="button" class="btn btn-secondary ms-2" (click)="resetForm()">Reset</button>
+      </div>
+    </div>
+
+  </form>
+</div>

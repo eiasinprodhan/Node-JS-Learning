@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <h2>Addresses</h2>
+
+    <!-- Address List -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Address Line 1</th>
+                <th>Address Line 2</th>
+                <th>Country</th>
+                <th>Division</th>
+                <th>District</th>
+                <th>Police Station</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let address of addresses">
+                <td>{{ address.id }}</td>
+                <td>{{ address.address_line_1 }}</td>
+                <td>{{ address.address_line_2 }}</td>
+                <td>{{ address.country }}</td>
+                <td>{{ address.division }}</td>
+                <td>{{ address.district }}</td>
+                <td>{{ address.police_station }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
